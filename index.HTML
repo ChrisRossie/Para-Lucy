@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Museo para Lucy</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Playfair+Display:wght@700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --girasol: #FFC107;
+            --noche: #0A1930;
+            --luna: #E6E6FA;
+            --texto: #333333;
+            --sombra: rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: linear-gradient(135deg, var(--noche) 0%, #1A3A5F 100%);
+            color: var(--texto);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            touch-action: pan-y;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        #museo-container {
+            width: 100vw;
+            min-height: 100vh;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header-museo {
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            z-index: 20;
+        }
+
+        .titulo-museo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--girasol);
+            text-shadow: 0 0 12px rgba(255, 193, 7, 0.4);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .subtitulo-museo {
+            font-size: 1.1rem;
+            color: var(--luna);
+            opacity: 0.9;
+            max-width: 90%;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .sala-container {
+            background: rgba(255, 255, 255, 0.93);
+            border-radius: 16px;
+            box-shadow: 0 12px 30px var(--sombra);
+            overflow: hidden;
+            position: relative;
+            min-height: 70vh;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            /* Animación de transición */
+            transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+        }
+
+        /* Clases para la animación de entrada/salida */
+        .sala-container.fade-out {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .sala-container.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fondo-arte {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.35;
+            z-index: 1;
+            transition: opacity 1.2s ease;
+        }
+
+        .contenido-sala {
+            position: relative;
+            z-index: 2;
+            padding: 25px 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .texto-historia {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            text-align: center;
+            margin: auto 0;
+            padding: 20px 0;
+            color: var(--texto);
+        }
+
+        .texto-historia h2 {
+            color: var(--noche);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .texto-historia p {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .info-obra {
+            background: rgba(10, 25, 48, 0.85);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .titulo-obra {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--girasol);
+            margin-bottom: 5px;
+        }
+
+        .navegacion {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .btn-nav {
+            background: linear-gradient(to bottom, var(--girasol), #E6A000);
+            color: var(--noche);
+            border: none;
+            padding: 14px 20px;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--sombra);
+            z-index: 10;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            flex: 1;
+            margin: 0 5px;
+            justify-content: center;
+        }
+
+        .btn-nav:active {
+            transform: scale(0.96);
+        }
+
+        .btn-nav:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            color: #666;
+        }
+
+        .contador {
+            text-align: center;
+            font-size: 1rem;
+            color: var(--noche);
+            margin: 15px 0;
+            opacity: 0.8;
+            z-index: 10;
+        }
+
+        .barra-progreso {
+            height: 6px;
+            background: rgba(10, 25, 48, 0.1);
+            border-radius: 3px;
+            margin: 15px 0;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .progreso-lleno {
+            height: 100%;
+            background: linear-gradient(90deg, var(--girasol), #FF8C00);
+            width: 0%;
+            transition: width 0.7s ease;
+            border-radius: 3px;
+        }
+
+        .efecto-estrellas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .estrella {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: brillar 3s infinite ease-in-out;
+        }
+
+        @keyframes brillar {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .texto-animado {
+            animation: aparecer 1s ease forwards;
+        }
+
+        .sala-final .fondo-arte {
+            opacity: 0.25;
+        }
+
+        .poema-completo {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 12px;
+            padding: 25px;
+            max-height: 75vh;
+            overflow-y: auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            color: var(--texto);
+        }
+
+        .poema-completo h3 {
+            color: var(--noche);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .poema-completo p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 480px) {
+            .titulo-museo { font-size: 2.3rem; }
+            .subtitulo-museo { font-size: 1rem; }
+            .texto-historia { font-size: 1.1rem; padding: 15px 0; }
+            .texto-historia h2 { font-size: 1.8rem; }
+            .info-obra { font-size: 0.85rem; padding: 12px; }
+            .titulo-obra { font-size: 1.1rem; }
+            .btn-nav { padding: 12px 15px; font-size: 1rem; }
+            .contenido-sala { padding: 20px 15px; }
+            .sala-container { min-height: 65vh; }
+        }
+    </style>
+</head>
+<body>
+    <div id="museo-container">
+        <div class="header-museo">
+            <h1 class="titulo-museo">Museo del Corazón</h1>
+            <p class="subtitulo-museo">Una experiencia creada especialmente para Lucy</p>
+        </div>
+
+        <div class="sala-container">
+            <div class="fondo-arte" id="fondo-arte"></div>
+            
+            <div class="contenido-sala">
+                <div class="texto-historia" id="texto-historia"></div>
+                
+                <div class="barra-progreso">
+                    <div class="progreso-lleno" id="progreso"></div>
+                </div>
+                
+                <div class="contador" id="contador">Sala 1 de 9</div>
+                
+                <div class="navegacion">
+                    <button id="btn-atras" class="btn-nav" disabled>
+                        « Atrás
+                    </button>
+                    <button id="btn-adelante" class="btn-nav">
+                        Siguiente »
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="efecto-estrellas" id="efecto-estrellas"></div>
+    <script>
+        const pasajes = [
+            {
+                texto: `<h2>Lucy,</h2>
+                       <p>No me enamoré de ti por necesidad ni soledad. No fuiste remedio para vacíos ni parche para grietas.</p>`,
+                imagen: "1.jpg",
+                titulo: "La Calma antes del Amanecer",
+                artista: "Desconocido",
+                año: "2023",
+                info: "Un paisaje sereno que evoca la tranquilidad antes de un nuevo comienzo."
+            },
+            {
+                texto: `<p>Me enamoré porque hay algo en ti que desafía toda lógica. Algo que mi alma reconoció al instante, como ese tulipán que floreció en nuestro invierno.</p>`,
+                imagen: "2.jpg",
+                titulo: "La Noche Estrellada",
+                artista: "Vincent van Gogh",
+                año: "1889",
+                info: "La inmensidad y la maravilla de la noche, donde todo es posible."
+            },
+            {
+                texto: `<p>Fue como si te hubiera esperado desde siempre. Como si al verte entre girasoles en aquel museo, todo en mí gritara: "Ahí es".</p>`,
+                imagen: "3.jpg",
+                titulo: "Mujer con sombrilla",
+                artista: "Claude Monet",
+                año: "1875",
+                info: "Un paseo al atardecer, capturando la luz dorada de un encuentro."
+            },
+            {
+                texto: `<p>No fue solo tu sonrisa lunar ni tus palabras que me desarman. Fue la calma que sembraste en mí: ese hogar sin coordenadas donde por fin pude soltar el peso de vagar sin pertenecer.</p>`,
+                imagen: "4.jpg",
+                titulo: "La Dama de Shalott",
+                artista: "John William Waterhouse",
+                año: "1888",
+                info: "La búsqueda de un lugar al que pertenecer, encontrando consuelo en la calma."
+            },
+            {
+                texto: `<p>Contigo no hay prisa ni presión. Solo certeza. Eres mi equilibrio en el caos, como girasoles que siguen tu luz de luna llena.</p>`,
+                imagen: "5.jpg",
+                titulo: "El Caminante sobre el Mar de Nubes",
+                artista: "Caspar David Friedrich",
+                año: "1818",
+                info: "La visión de un nuevo horizonte, hallando certeza en lo incierto."
+            },
+            {
+                texto: `<p>Me enamoré sin planes ni estrategias. Y cuando desperté, ya eras mi pensamiento más sincero al amanecer, mis días suaves como pinceladas, mis futuros más reales.</p>`,
+                imagen: "6.jpg",
+                titulo: "Las Espigadoras",
+                artista: "Jean-François Millet",
+                año: "1857",
+                info: "Un reflejo de los días de trabajo y la promesa de un futuro cosechado juntos."
+            },
+            {
+                texto: `<p>Por eso no vengo con promesas de perfección.<br>
+                          Te pido caminar contigo:<br>
+                          – No para atarte, sino para ser tu faro cuando la niebla olvide tu esencia.<br>
+                          – No para llenar tus silencios, sino para contemplarlos como obras de arte.<br>
+                          – No para ser tu dueño, sino el jardinero que cuida tus sueños como girasoles.</p>`,
+                imagen: "7.jpg",
+                titulo: "El Beso",
+                artista: "Gustav Klimt",
+                año: "1907-1908",
+                info: "La conexión íntima y el cuidado mutuo, como un jardín de sueños."
+            },
+            {
+                texto: `<p>Porque tú no eres alguien más. Eres el museo donde mi alma encontró su hogar. El lugar al que siempre quiso volver, incluso antes de saber que existías.</p>`,
+                imagen: "8.jpg",
+                titulo: "El Nacimiento de Venus",
+                artista: "Sandro Botticelli",
+                año: "1485",
+                info: "El surgimiento de la belleza y un nuevo comienzo, como el hogar del alma."
+            },
+            {
+                texto: `<div class="poema-completo">
+                         <h3>Nuestro poema completo</h3>
+                         <p>Lucy,</p>
+                         <p>No me enamoré de ti por necesidad ni soledad. No fuiste remedio para vacíos ni parche para grietas.</p>
+                         <p>Me enamoré porque hay algo en ti que desafía toda lógica. Algo que mi alma reconoció al instante, como ese tulipán que floreció en nuestro invierno.</p>
+                         <p>Fue como si te hubiera esperado desde siempre. Como si al verte entre girasoles en aquel museo, todo en mí gritara: "Ahí es".</p>
+                         <p>No fue solo tu sonrisa lunar ni tus palabras que me desarman. Fue la calma que sembraste en mí: ese hogar sin coordenadas donde por fin pude soltar el peso de vagar sin pertenecer.</p>
+                         <p>Contigo no hay prisa ni presión. Solo certeza. Eres mi equilibrio en el caos, como girasoles que siguen tu luz de luna llena.</p>
+                         <p>Me enamoré sin planes ni estrategias. Y cuando desperté, ya eras mi pensamiento más sincero al amanecer, mis días suaves como pinceladas, mis futuros más reales.</p>
+                         <p>Por eso no vengo con promesas de perfección.<br>
+                            Te pido caminar contigo:<br>
+                            – No para atarte, sino para ser tu faro cuando la niebla olvide tu esencia.<br>
+                            – No para llenar tus silencios, sino para contemplarlos como obras de arte.<br>
+                            – No para ser tu dueño, sino el jardinero que cuida tus sueños como girasoles.</p>
+                         <p>Porque tú no eres alguien más. Eres el museo donde mi alma encontró su hogar. El lugar al que siempre quiso volver, incluso antes de saber que existías.</p>
+                         <p>¿Aceptas pintar conmigo esta vida efímera?<br>
+                            Libres como pinceles sueltos.<br>
+                            Cuidándonos como arte sagrado.<br>
+                            Cada instante, por fugaz que sea, será nuestro cuadro perfecto.</p>
+                       </div>`,
+                imagen: "8.jpg", // Puedes cambiar esta por otra si quieres una imagen final diferente
+                titulo: "La Noche Estrellada",
+                artista: "Vincent van Gogh",
+                año: "1889",
+                info: "Una obra maestra que representa la belleza y la profundidad de la conexión."
+            }
+        ];
+        const textoHistoria = document.getElementById('texto-historia');
+        const fondoArte = document.getElementById('fondo-arte');
+        const btnAtras = document.getElementById('btn-atras');
+        const btnAdelante = document.getElementById('btn-adelante');
+        const barraProgreso = document.getElementById('progreso');
+        const contador = document.getElementById('contador');
+        const salaContainer = document.querySelector('.sala-container');
+        const efectoEstrellas = document.getElementById('efecto-estrellas');
+        const audioElement = document.getElementById('background-music'); // Elemento de audio
+
+        let pasoActual = 0;
+        let xDown = null;
+
+        // --- Lógica para la Música con MP3 ---
+        function playBackgroundMusic() {
+            if (audioElement) {
+                audioElement.play().then(() => {
+                    console.log("Música de fondo MP3 reproduciéndose.");
+                }).catch(error => {
+                    console.error("Error al reproducir la música MP3 (puede ser por políticas del navegador, se necesita interacción del usuario):", error);
+                });
+            }
+        }
+        // --- FIN Lógica para la Música con MP3 ---
+
+
+        function inicializarMuseo() {
+            renderizarPasaje(false); // No animar en la primera carga
+            crearEstrellas();
+            
+            btnAtras.addEventListener('click', anteriorPasaje);
+            btnAdelante.addEventListener('click', siguientePasaje);
+            
+            document.addEventListener('touchstart', handleTouchStart, false);        
+            document.addEventListener('touchmove', handleTouchMove, false);
+
+            // Intentar iniciar la música automáticamente
+            playBackgroundMusic();
+
+            // Fallback para las políticas de reproducción automática de los navegadores:
+            // La música solo se iniciará después de una interacción del usuario.
+            // Si la música no suena al cargar, un toque/clic en cualquier parte la activará.
+            document.body.addEventListener('click', function() {
+                if (audioElement && audioElement.paused) {
+                    playBackgroundMusic();
+                }
+            }, { once: true });
+            document.body.addEventListener('touchend', function() {
+                if (audioElement && audioElement.paused) {
+                    playBackgroundMusic();
+                }
+            }, { once: true });
+        }
+
+        function renderizarPasaje(animate = true) {
+            const pasaje = pasajes[pasoActual];
+            
+            if (animate) {
+                salaContainer.classList.add('fade-out');
+            }
+
+            setTimeout(() => {
+                textoHistoria.innerHTML = pasaje.texto;
+                fondoArte.style.backgroundImage = `url('${pasaje.imagen}')`;
+                
+                contador.textContent = `Sala ${pasoActual + 1} de ${pasajes.length}`;
+                
+                const porcentaje = ((pasoActual + 1) / pasajes.length) * 100;
+                barraProgreso.style.width = `${porcentaje}%`;
+                
+                btnAtras.disabled = pasoActual === 0;
+                btnAdelante.textContent = pasoActual === pasajes.length - 1 ? "Comienzo" : "Siguiente »";
+                
+                if(pasoActual < pasajes.length - 1) {
+                    textoHistoria.innerHTML += `
+                        <div class="info-obra">
+                            <div class="titulo-obra">${pasaje.titulo}</div>
+                            <div>${pasaje.artista}, ${pasaje.año}</div>
+                            <div><em>${pasaje.info}</em></div>
+                        </div>
+                    `;
+                }
+                
+                if(pasoActual === pasajes.length - 1) {
+                    salaContainer.classList.add('sala-final');
+                } else {
+                    salaContainer.classList.remove('sala-final');
+                }
+
+                if (animate) {
+                    salaContainer.classList.remove('fade-out');
+                    salaContainer.classList.add('fade-in');
+                    textoHistoria.classList.remove('texto-animado');
+                    void textoHistoria.offsetWidth;
+                    textoHistoria.classList.add('texto-animado');
+                } else {
+                    salaContainer.classList.add('fade-in');
+                    textoHistoria.classList.add('texto-animado');
+                }
+
+
+            }, animate ? 700 : 0);
+        }
+
+        function siguientePasaje() {
+            if (pasoActual < pasajes.length - 1) {
+                pasoActual++;
+            } else {
+                pasoActual = 0;
+            }
+            renderizarPasaje();
+        }
+
+        function anteriorPasaje() {
+            if (pasoActual > 0) {
+                pasoActual--;
+                renderizarPasaje();
+            }
+        }
+
+        function crearEstrellas() {
+            const estrellasCantidad = 150;
+            const fragment = document.createDocumentFragment();
+
+            for (let i = 0; i < estrellasCantidad; i++) {
+                const estrella = document.createElement('div');
+                estrella.classList.add('estrella');
+                
+                const size = Math.random() * 3;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 3;
+
+                estrella.style.width = `${size}px`;
+                estrella.style.height = `${size}px`;
+                estrella.style.left = `${posX}%`;
+                estrella.style.top = `${posY}%`;
+                estrella.style.animationDelay = `${delay}s`;
+                
+                fragment.appendChild(estrella);
+            }
+            efectoEstrellas.appendChild(fragment);
+        }
+
+        function handleTouchStart(evt) {
+            xDown = evt.touches[0].clientX;
+        }
+
+        function handleTouchMove(evt) {
+            if (!xDown) return;
+
+            const xUp = evt.touches[0].clientX;
+            const diff = xDown - xUp;
+            
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    siguientePasaje();
+                } else {
+                    anteriorPasaje();
+                }
+                xDown = null;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', inicializarMuseo);
+    </script>
+    <audio id="background-music" src="cancion.mp3" loop preload="auto"></audio>
+</body>
+</html>
