@@ -81,11 +81,9 @@
             flex-direction: column;
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            /* Animación de transición */
             transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
         }
 
-        /* Clases para la animación de entrada/salida */
         .sala-container.fade-out {
             opacity: 0;
             transform: translateY(20px);
@@ -325,78 +323,78 @@
     
     <div class="efecto-estrellas" id="efecto-estrellas"></div>
     <script>
-        const pasajes = [
+        const passages = [
             {
-                texto: `<h2>Lucy,</h2>
+                text: `<h2>Lucy,</h2>
                        <p>No me enamoré de ti por necesidad ni soledad. No fuiste remedio para vacíos ni parche para grietas.</p>`,
-                imagen: "1.jpg",
-                titulo: "La Calma antes del Amanecer",
-                artista: "Desconocido",
-                año: "2023",
+                image: "1.jpg",
+                title: "La Calma antes del Amanecer",
+                artist: "Desconocido",
+                year: "2023",
                 info: "Un paisaje sereno que evoca la tranquilidad antes de un nuevo comienzo."
             },
             {
-                texto: `<p>Me enamoré porque hay algo en ti que desafía toda lógica. Algo que mi alma reconoció al instante, como ese tulipán que floreció en nuestro invierno.</p>`,
-                imagen: "2.jpg",
-                titulo: "La Noche Estrellada",
-                artista: "Vincent van Gogh",
-                año: "1889",
+                text: `<p>Me enamoré porque hay algo en ti que desafía toda lógica. Algo que mi alma reconoció al instante, como ese tulipán que floreció en nuestro invierno.</p>`,
+                image: "2.jpg",
+                title: "La Noche Estrellada",
+                artist: "Vincent van Gogh",
+                year: "1889",
                 info: "La inmensidad y la maravilla de la noche, donde todo es posible."
             },
             {
-                texto: `<p>Fue como si te hubiera esperado desde siempre. Como si al verte entre girasoles en aquel museo, todo en mí gritara: "Ahí es".</p>`,
-                imagen: "3.jpg",
-                titulo: "Mujer con sombrilla",
-                artista: "Claude Monet",
-                año: "1875",
+                text: `<p>Fue como si te hubiera esperado desde siempre. Como si al verte entre girasoles en aquel museo, todo en mí gritara: "Ahí es".</p>`,
+                image: "3.jpg",
+                title: "Mujer con sombrilla",
+                artist: "Claude Monet",
+                year: "1875",
                 info: "Un paseo al atardecer, capturando la luz dorada de un encuentro."
             },
             {
-                texto: `<p>No fue solo tu sonrisa lunar ni tus palabras que me desarman. Fue la calma que sembraste en mí: ese hogar sin coordenadas donde por fin pude soltar el peso de vagar sin pertenecer.</p>`,
-                imagen: "4.jpg",
-                titulo: "La Dama de Shalott",
-                artista: "John William Waterhouse",
-                año: "1888",
+                text: `<p>No fue solo tu sonrisa lunar ni tus palabras que me desarman. Fue la calma que sembraste en mí: ese hogar sin coordenadas donde por fin pude soltar el peso de vagar sin pertenecer.</p>`,
+                image: "4.jpg",
+                title: "La Dama de Shalott",
+                artist: "John William Waterhouse",
+                year: "1888",
                 info: "La búsqueda de un lugar al que pertenecer, encontrando consuelo en la calma."
             },
             {
-                texto: `<p>Contigo no hay prisa ni presión. Solo certeza. Eres mi equilibrio en el caos, como girasoles que siguen tu luz de luna llena.</p>`,
-                imagen: "5.jpg",
-                titulo: "El Caminante sobre el Mar de Nubes",
-                artista: "Caspar David Friedrich",
-                año: "1818",
+                text: `<p>Contigo no hay prisa ni presión. Solo certeza. Eres mi equilibrio en el caos, como girasoles que siguen tu luz de luna llena.</p>`,
+                image: "5.jpg",
+                title: "El Caminante sobre el Mar de Nubes",
+                artist: "Caspar David Friedrich",
+                year: "1818",
                 info: "La visión de un nuevo horizonte, hallando certeza en lo incierto."
             },
             {
-                texto: `<p>Me enamoré sin planes ni estrategias. Y cuando desperté, ya eras mi pensamiento más sincero al amanecer, mis días suaves como pinceladas, mis futuros más reales.</p>`,
-                imagen: "6.jpg",
-                titulo: "Las Espigadoras",
-                artista: "Jean-François Millet",
-                año: "1857",
+                text: `<p>Me enamoré sin planes ni estrategias. Y cuando desperté, ya eras mi pensamiento más sincero al amanecer, mis días suaves como pinceladas, mis futuros más reales.</p>`,
+                image: "6.jpg",
+                title: "Las Espigadoras",
+                artist: "Jean-François Millet",
+                year: "1857",
                 info: "Un reflejo de los días de trabajo y la promesa de un futuro cosechado juntos."
             },
             {
-                texto: `<p>Por eso no vengo con promesas de perfección.<br>
+                text: `<p>Por eso no vengo con promesas de perfección.<br>
                           Te pido caminar contigo:<br>
                           – No para atarte, sino para ser tu faro cuando la niebla olvide tu esencia.<br>
                           – No para llenar tus silencios, sino para contemplarlos como obras de arte.<br>
                           – No para ser tu dueño, sino el jardinero que cuida tus sueños como girasoles.</p>`,
-                imagen: "7.jpg",
-                titulo: "El Beso",
-                artista: "Gustav Klimt",
-                año: "1907-1908",
+                image: "7.jpg",
+                title: "El Beso",
+                artist: "Gustav Klimt",
+                year: "1907-1908",
                 info: "La conexión íntima y el cuidado mutuo, como un jardín de sueños."
             },
             {
-                texto: `<p>Porque tú no eres alguien más. Eres el museo donde mi alma encontró su hogar. El lugar al que siempre quiso volver, incluso antes de saber que existías.</p>`,
-                imagen: "8.jpg",
-                titulo: "El Nacimiento de Venus",
-                artista: "Sandro Botticelli",
-                año: "1485",
+                text: `<p>Porque tú no eres alguien más. Eres el museo donde mi alma encontró su hogar. El lugar al que siempre quiso volver, incluso antes de saber que existías.</p>`,
+                image: "8.jpg",
+                title: "El Nacimiento de Venus",
+                artist: "Sandro Botticelli",
+                year: "1485",
                 info: "El surgimiento de la belleza y un nuevo comienzo, como el hogar del alma."
             },
             {
-                texto: `<div class="poema-completo">
+                text: `<div class="poema-completo">
                          <h3>Nuestro poema completo</h3>
                          <p>Lucy,</p>
                          <p>No me enamoré de ti por necesidad ni soledad. No fuiste remedio para vacíos ni parche para grietas.</p>
@@ -416,60 +414,52 @@
                             Cuidándonos como arte sagrado.<br>
                             Cada instante, por fugaz que sea, será nuestro cuadro perfecto.</p>
                        </div>`,
-                imagen: "8.jpg", // Puedes cambiar esta por otra si quieres una imagen final diferente
-                titulo: "La Noche Estrellada",
-                artista: "Vincent van Gogh",
-                año: "1889",
+                image: "8.jpg",
+                title: "La Noche Estrellada",
+                artist: "Vincent van Gogh",
+                year: "1889",
                 info: "Una obra maestra que representa la belleza y la profundidad de la conexión."
             }
         ];
-        const textoHistoria = document.getElementById('texto-historia');
-        const fondoArte = document.getElementById('fondo-arte');
-        const btnAtras = document.getElementById('btn-atras');
-        const btnAdelante = document.getElementById('btn-adelante');
-        const barraProgreso = document.getElementById('progreso');
-        const contador = document.getElementById('contador');
-        const salaContainer = document.querySelector('.sala-container');
-        const efectoEstrellas = document.getElementById('efecto-estrellas');
-        const audioElement = document.getElementById('background-music'); // Elemento de audio
 
-        let pasoActual = 0;
+        const historyText = document.getElementById('texto-historia');
+        const artBackground = document.getElementById('fondo-arte');
+        const prevBtn = document.getElementById('btn-atras');
+        const nextBtn = document.getElementById('btn-adelante');
+        const progressBar = document.getElementById('progreso');
+        const counter = document.getElementById('contador');
+        const roomContainer = document.querySelector('.sala-container');
+        const starEffect = document.getElementById('efecto-estrellas');
+        const audioElement = document.getElementById('background-music');
+
+        let currentStep = 0;
         let xDown = null;
 
-        // --- Lógica para la Música con MP3 ---
         function playBackgroundMusic() {
             if (audioElement) {
                 audioElement.play().then(() => {
-                    console.log("Música de fondo MP3 reproduciéndose.");
                 }).catch(error => {
-                    console.error("Error al reproducir la música MP3 (puede ser por políticas del navegador, se necesita interacción del usuario):", error);
                 });
             }
         }
-        // --- FIN Lógica para la Música con MP3 ---
 
-
-        function inicializarMuseo() {
-            renderizarPasaje(false); // No animar en la primera carga
-            crearEstrellas();
+        function initializeMuseum() {
+            renderPassage(false);
+            createStars();
             
-            btnAtras.addEventListener('click', anteriorPasaje);
-            btnAdelante.addEventListener('click', siguientePasaje);
+            prevBtn.addEventListener('click', previousPassage);
+            nextBtn.addEventListener('click', nextPassage);
             
             document.addEventListener('touchstart', handleTouchStart, false);        
             document.addEventListener('touchmove', handleTouchMove, false);
 
-            // Intentar iniciar la música automáticamente
             playBackgroundMusic();
 
-            // Fallback para las políticas de reproducción automática de los navegadores:
-            // La música solo se iniciará después de una interacción del usuario.
-            // Si la música no suena al cargar, un toque/clic en cualquier parte la activará.
             document.body.addEventListener('click', function() {
                 if (audioElement && audioElement.paused) {
                     playBackgroundMusic();
                 }
-            }, { once: true });
+            }, { once: true }); 
             document.body.addEventListener('touchend', function() {
                 if (audioElement && audioElement.paused) {
                     playBackgroundMusic();
@@ -477,94 +467,94 @@
             }, { once: true });
         }
 
-        function renderizarPasaje(animate = true) {
-            const pasaje = pasajes[pasoActual];
+        function renderPassage(animate = true) {
+            const passage = passages[currentStep];
             
             if (animate) {
-                salaContainer.classList.add('fade-out');
+                roomContainer.classList.add('fade-out');
             }
 
             setTimeout(() => {
-                textoHistoria.innerHTML = pasaje.texto;
-                fondoArte.style.backgroundImage = `url('${pasaje.imagen}')`;
+                historyText.innerHTML = passage.text;
+                artBackground.style.backgroundImage = `url('${passage.image}')`;
                 
-                contador.textContent = `Sala ${pasoActual + 1} de ${pasajes.length}`;
+                counter.textContent = `Sala ${currentStep + 1} de ${passages.length}`;
                 
-                const porcentaje = ((pasoActual + 1) / pasajes.length) * 100;
-                barraProgreso.style.width = `${porcentaje}%`;
+                const percentage = ((currentStep + 1) / passages.length) * 100;
+                progressBar.style.width = `${percentage}%`;
                 
-                btnAtras.disabled = pasoActual === 0;
-                btnAdelante.textContent = pasoActual === pasajes.length - 1 ? "Comienzo" : "Siguiente »";
+                prevBtn.disabled = currentStep === 0;
+                nextBtn.textContent = currentStep === passages.length - 1 ? "Comienzo" : "Siguiente »";
                 
-                if(pasoActual < pasajes.length - 1) {
-                    textoHistoria.innerHTML += `
+                if(currentStep < passages.length - 1) {
+                    historyText.innerHTML += `
                         <div class="info-obra">
-                            <div class="titulo-obra">${pasaje.titulo}</div>
-                            <div>${pasaje.artista}, ${pasaje.año}</div>
-                            <div><em>${pasaje.info}</em></div>
+                            <div class="titulo-obra">${passage.title}</div>
+                            <div>${passage.artist}, ${passage.year}</div>
+                            <div><em>${passage.info}</em></div>
                         </div>
                     `;
                 }
                 
-                if(pasoActual === pasajes.length - 1) {
-                    salaContainer.classList.add('sala-final');
+                if(currentStep === passages.length - 1) {
+                    roomContainer.classList.add('sala-final');
                 } else {
-                    salaContainer.classList.remove('sala-final');
+                    roomContainer.classList.remove('sala-final');
                 }
 
                 if (animate) {
-                    salaContainer.classList.remove('fade-out');
-                    salaContainer.classList.add('fade-in');
-                    textoHistoria.classList.remove('texto-animado');
-                    void textoHistoria.offsetWidth;
-                    textoHistoria.classList.add('texto-animado');
+                    roomContainer.classList.remove('fade-out');
+                    roomContainer.classList.add('fade-in');
+                    historyText.classList.remove('texto-animado');
+                    void historyText.offsetWidth;
+                    historyText.classList.add('texto-animado');
                 } else {
-                    salaContainer.classList.add('fade-in');
-                    textoHistoria.classList.add('texto-animado');
+                    roomContainer.classList.add('fade-in');
+                    historyText.classList.add('texto-animado');
                 }
 
 
             }, animate ? 700 : 0);
         }
 
-        function siguientePasaje() {
-            if (pasoActual < pasajes.length - 1) {
-                pasoActual++;
+        function nextPassage() {
+            if (currentStep < passages.length - 1) {
+                currentStep++;
             } else {
-                pasoActual = 0;
+                currentStep = 0;
             }
-            renderizarPasaje();
+            renderPassage();
         }
 
-        function anteriorPasaje() {
-            if (pasoActual > 0) {
-                pasoActual--;
-                renderizarPasaje();
+        function previousPassage() {
+            if (currentStep > 0) {
+                currentStep--;
+                renderPassage();
             }
         }
 
-        function crearEstrellas() {
-            const estrellasCantidad = 150;
+        function createStars() {
+            const starCount = 150;
             const fragment = document.createDocumentFragment();
 
-            for (let i = 0; i < estrellasCantidad; i++) {
-                const estrella = document.createElement('div');
-                estrella.classList.add('estrella');
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('estrella');
                 
                 const size = Math.random() * 3;
                 const posX = Math.random() * 100;
                 const posY = Math.random() * 100;
                 const delay = Math.random() * 3;
 
-                estrella.style.width = `${size}px`;
-                estrella.style.height = `${size}px`;
-                estrella.style.left = `${posX}%`;
-                estrella.style.top = `${posY}%`;
-                estrella.style.animationDelay = `${delay}s`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.animationDelay = `${delay}s`;
                 
-                fragment.appendChild(estrella);
+                fragment.appendChild(star);
             }
-            efectoEstrellas.appendChild(fragment);
+            starEffect.appendChild(fragment);
         }
 
         function handleTouchStart(evt) {
@@ -579,15 +569,15 @@
             
             if (Math.abs(diff) > 50) {
                 if (diff > 0) {
-                    siguientePasaje();
+                    nextPassage();
                 } else {
-                    anteriorPasaje();
+                    previousPassage();
                 }
                 xDown = null;
             }
         }
 
-        document.addEventListener('DOMContentLoaded', inicializarMuseo);
+        document.addEventListener('DOMContentLoaded', initializeMuseum);
     </script>
     <audio id="background-music" src="cancion.mp3" loop preload="auto"></audio>
 </body>
